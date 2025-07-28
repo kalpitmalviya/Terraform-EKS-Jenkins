@@ -34,11 +34,14 @@ module "vpc" {
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 21.0"
+  version = "~> 21.0" # Use "~> 21.0" to allow for patch updates within the 21.x series, or "21.0.3" for exact pinning.
 
-  # cluster_name       = "eks-cluster"  # Removed unsupported argument
-  # cluster_version    = "1.24.0"        # Removed unsupported argument
+  name               = "jenkins-eks-cluster"
+  kubernetes_version = "1.33" # Using the latest EKS supported Kubernetes version
 
+
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnets
 
   eks_managed_node_groups = {
     node = {
@@ -46,12 +49,12 @@ module "eks" {
       max_size         = 2
       min_size         = 1
 
-      instance_types = ["t3.micro"]
+      instance_type = "t3.micro"
+      additional_tags = {
+        Name = "eks-node"
+      }
     }
   }
-
-  vpc_id     = module.vpc.default_vpc_id
-  subnet_ids = module.vpc.private_subnets
 
   tags = {
     Environment = "dev"
