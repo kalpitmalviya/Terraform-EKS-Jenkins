@@ -1,0 +1,12 @@
+apiVersion: v1 # API version for Service resources
+kind: Service    # Type of Kubernetes resource
+metadata:
+  name: my-nginx-service # Name of your service
+spec:
+  selector:
+    app: nginx-web # Selects pods with this label (must match deployment's pod labels)
+  ports:
+    - protocol: TCP
+      port: 80        # The port the service itself will listen on
+      targetPort: 80  # The port on the pods that the service will forward traffic to (containerPort)
+  type: LoadBalancer  # Type of service: will provision an AWS ELB (Load Balancer)
