@@ -38,7 +38,7 @@ module "eks" {
 
   name               = "jenkins-eks-cluster"
   kubernetes_version = "1.33" # Using the latest EKS supported Kubernetes version
-  cluster_endpoint_public_access = true
+
 
 
   vpc_id     = module.vpc.vpc_id
