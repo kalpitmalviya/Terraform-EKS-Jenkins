@@ -50,7 +50,7 @@ module "eks" {
       max_size         = 2
       min_size         = 1
 
-      instance_type = "t3.micro"
+      instance_type = "t3.small"
       additional_tags = {
         Name = "eks-node"
       }
