@@ -15,8 +15,8 @@ spec:
         app: nginx-web # Labels applied to the pods
     spec:
       containers:
-      - name: nginx-container # Name of the container
-        image: nginx:latest   # Docker image to use (nginx latest from Docker Hub)
+      - name: nginx-container 
+        image: nginx:latest  
         ports:
         - containerPort: 80 # Port the container listens on
         resources: # Optional: Define resource requests and limits for the container
